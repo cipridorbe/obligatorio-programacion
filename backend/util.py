@@ -53,7 +53,7 @@ def parse_cedula(cedula: str) -> int:
     # convert to int and return
     return int(cedula)
 
-def parse_numero_celular(celular: str) -> str:
+def parse_celular(celular: str) -> str:
     # Check for errors
     if celular is None:
         raise TypeError("número de celular no puede ser None")
@@ -79,10 +79,19 @@ def parse_fecha(fecha: str) -> date:
         raise e
 
 def parse_fecha_nacimiento(fecha: str) -> date:
-    fecha_ = parse_fecha(fecha)
-    if fecha_ > date.today():
+    _fecha = parse_fecha(fecha)
+    if _fecha > date.today():
         raise ValueError("La fecha de nacimiento debe ubicarse en el pasado")
-    return fecha_
+    return _fecha
+
+def parse_fecha_ingreso(fecha: str) -> date:
+    _fecha = parse_fecha(fecha)
+    if _fecha > date.today():
+        raise ValueError("La fecha de ingreso debe ubicarse en el presente o en el pasado")
+    return _fecha
+
+def parse_tipo(tipo: str) -> bool
+
 
 # --------------------- Input section --------------------- #
 
@@ -103,11 +112,14 @@ def input_apellido(msg: str) -> str:
 def input_cedula(msg: str) -> int:
     __input_generico(msg, parse_cedula)
 
-def input_numero_celular(msg: str) -> str:
-    __input_generico(msg, parse_numero_celular)
+def input_celular(msg: str) -> str:
+    __input_generico(msg, parse_celular)
 
 def input_fecha(msg: str) -> date:
     __input_generico(msg, parse_fecha)
 
 def input_fecha_nacimiento(msg: str) -> date:
     __input_generico(msg, parse_fecha_nacimiento)
+
+def input_fecha_ingreso(msg: str) -> date:
+    __input_generico(msg, parse_fecha_ingreso)

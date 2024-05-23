@@ -1,10 +1,10 @@
-import consulta_medica
-import especialidad
-import medico
-import persona
-import policlinica
-import socio
-import util
+import backend.consulta_medica
+import backend.especialidad
+import backend.medico
+import backend.persona
+import backend.policlinica
+import backend.socio
+import backend.util
 
 # Entry point
 def main():
