@@ -90,8 +90,23 @@ def parse_fecha_ingreso(fecha: str) -> date:
         raise ValueError("La fecha de ingreso debe ubicarse en el presente o en el pasado")
     return _fecha
 
-def parse_tipo(tipo: str) -> bool
+# 1 (true) = bonificado
+# 2 (false) = no bonificado
+def parse_tipo(tipo: str) -> bool:
+    if tipo == None:
+        raise TypeError("Tipo no puede ser None")
+    tipo = tipo.strip()
+    if tipo == "1":
+        return True
+    if tipo == "2":
+        return False
+    raise ValueError("Tipo debe ser 1 o 2")
 
+def parse_precio(precio: str) -> int:
+    _precio = int(precio)
+    if _precio < 0:
+        raise ValueError("Precio no puede ser negativo")
+    return _precio
 
 # --------------------- Input section --------------------- #
 
@@ -123,3 +138,9 @@ def input_fecha_nacimiento(msg: str) -> date:
 
 def input_fecha_ingreso(msg: str) -> date:
     __input_generico(msg, parse_fecha_ingreso)
+
+def input_tipo(msg: str) -> bool:
+    __input_generico(msg, parse_tipo)
+
+def input_precio(msg: str) -> int:
+    __input_generico(msg, parse_precio)

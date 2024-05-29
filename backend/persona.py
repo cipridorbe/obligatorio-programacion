@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import date
-import util
+from backend import util
 
 '''
 Abstract class
