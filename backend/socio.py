@@ -22,10 +22,48 @@ class Socio(Persona):
         self.tipo = tipo
         self.deuda = deuda
     
+    # @staticmethod
+    # def dar_de_alta_socio():
+    #     vacio = Socio(None, None, 0, None, None, None, False, 0.0)
+    #     vacio.dar_de_alta_persona()
+    #     vacio.tipo = util.input_tipo("Ingrese el tipo de socio: 1- Bonificado 2- No bonificado: ")
+    #     vacio.deuda = 0.0
+    #     return vacio
+
     @staticmethod
-    def dar_de_alta_socio():
+    def dar_de_alta_socio(lista):
         vacio = Socio(None, None, 0, None, None, None, False, 0.0)
-        vacio.dar_de_alta_persona()
+        cedula = util.input_cedula("Ingrese la cédula de identidad: ")
+        while lista.contains(cedula):
+            print("Esta cédula ya está registrada.")
+            if util.input_tipo("1 - Ingresar una nueva cédula.\n2 - Salir.\n"):
+                cedula = util.input_cedula("Ingrese la cédula de identidad: ")
+            else:
+                return None
+        vacio.dar_de_alta_persona(cedula)
         vacio.tipo = util.input_tipo("Ingrese el tipo de socio: 1- Bonificado 2- No bonificado: ")
         vacio.deuda = 0.0
         return vacio
+    
+
+class ListaSocio:
+    def __init__(self, length: int = 0):
+        self.lista = [None] * length
+    
+    def contains(self, socio: Socio) -> bool:
+        for soc in self.lista:
+            if soc.cedula == socio.cedula:
+                return True
+        return False
+
+    def contains_cedula(self, cedula_socio: int) -> bool:
+        for soc in self.lista:
+            if soc.cedula == cedula_socio:
+                return True
+        return False
+    
+    def append(self, socio: Socio):
+        self.lista.append(socio)
+    
+    def insert(self, index: int, socio: Socio):
+        self.lista.insert(index, socio)

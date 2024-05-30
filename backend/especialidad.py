@@ -1,5 +1,4 @@
 from backend import util
-from main import policlinica_main
 
 '''
 Especialidad
@@ -15,17 +14,33 @@ class Especialidad:
         self.nombre = nombre
         self.precio = precio
     
+    # @staticmethod
+    # def dar_de_alta_especialidad():
+    #     nombre = util.input_nombre("Ingrese el nombre de la especialidad: ")
+    #     while policlinica_main.especialidades.contains(nombre):
+    #         print("Esta especialidad ya existe.")
+    #         if util.input_tipo("1 - Ingresar devuelta el nombre.\n2 - Salir."):
+    #             nombre = util.input_nombre("Ingrese el nombre de la especialidad: ")
+    #         else:
+    #             return None
+    #     precio = util.input_precio("Ingrese el precio asociado: ")
+    #     return Especialidad(nombre, precio)
+    
     @staticmethod
-    def dar_de_alta_especialidad():
-        nombre = util.parse_nombre("Ingrese el nombre de la especialidad: ")
-        while policlinica_main.lista_especialidad.contains(nombre):
-            nombre = util.parse_nombre("Esta especialidad ya existe.\n1 - Ingresar devuelta el nombre.\n2 - Salir.")
+    def dar_de_alta_especialidad(lista):
+        nombre = util.input_nombre("Ingrese el nombre de la especialidad: ")
+        while lista.contains(nombre):
+            print("Esta especialidad ya existe.")
+            if util.input_tipo("1 - Ingresar devuelta el nombre.\n2 - Salir.\n"):
+                nombre = util.input_nombre("Ingrese el nombre de la especialidad: ")
+            else:
+                return None
         precio = util.input_precio("Ingrese el precio asociado: ")
         return Especialidad(nombre, precio)
 
 
 class ListaEspecialidad:
-    def __init__(self, length: int):
+    def __init__(self, length: int = 0):
         self.lista = [None] * length
     
     def contains(self, especialidad: Especialidad) -> bool:
@@ -34,11 +49,17 @@ class ListaEspecialidad:
                 return True
         return False
 
-    def contains(self, nombre_especialidad: str) -> bool:
+    def contains_str(self, nombre_especialidad: str) -> bool:
         for esp in self.lista:
             if esp.nombre == nombre_especialidad:
                 return True
         return False
+    
+    def search(self, nombre_especialidad: str) -> Especialidad:
+        for esp in self.lista:
+            if esp.nombre == nombre_especialidad:
+                return esp
+        return None
     
     def append(self, especialidad: Especialidad):
         self.lista.append(especialidad)

@@ -1,6 +1,8 @@
 from backend import persona
 from backend import consulta_medica
 from backend.especialidad import ListaEspecialidad
+from backend.socio import ListaSocio
+from backend.medico import ListaMedico
 
 '''
 + dar_alta_medico()
@@ -11,8 +13,10 @@ from backend.especialidad import ListaEspecialidad
 
 class Policlinica:
     def __init__(self):
-        self.lista_especialidad = ListaEspecialidad()
-        pass
+        self.especialidades = ListaEspecialidad()
+        self.socios = ListaSocio()
+        self.medicos = ListaMedico()
+        
 
     def dar_alta_medico():
         pass

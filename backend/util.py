@@ -119,28 +119,28 @@ def __input_generico(msg: str, parse_func):
             print(e)
 
 def input_nombre(msg: str) -> str:
-    __input_generico(msg, parse_nombre)
+    return __input_generico(msg, parse_nombre)
 
 def input_apellido(msg: str) -> str:
-    __input_generico(msg, parse_apellido)
+    return __input_generico(msg, parse_apellido)
 
 def input_cedula(msg: str) -> int:
-    __input_generico(msg, parse_cedula)
+    return __input_generico(msg, parse_cedula)
 
 def input_celular(msg: str) -> str:
-    __input_generico(msg, parse_celular)
+    return __input_generico(msg, parse_celular)
 
 def input_fecha(msg: str) -> date:
-    __input_generico(msg, parse_fecha)
+    return __input_generico(msg, parse_fecha)
 
 def input_fecha_nacimiento(msg: str) -> date:
-    __input_generico(msg, parse_fecha_nacimiento)
+    return __input_generico(msg, parse_fecha_nacimiento)
 
 def input_fecha_ingreso(msg: str) -> date:
-    __input_generico(msg, parse_fecha_ingreso)
+    return __input_generico(msg, parse_fecha_ingreso)
 
 def input_tipo(msg: str) -> bool:
-    __input_generico(msg, parse_tipo)
+    return __input_generico(msg, parse_tipo)
 
 def input_precio(msg: str) -> int:
-    __input_generico(msg, parse_precio)
+    return __input_generico(msg, parse_precio)
