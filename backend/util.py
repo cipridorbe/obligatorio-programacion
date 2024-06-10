@@ -1,4 +1,5 @@
 from datetime import date
+from excepciones.excepciones import *
 
 
 # --------------------- Parse section --------------------- #
@@ -90,6 +91,12 @@ def parse_fecha_ingreso(fecha: str) -> date:
         raise ValueError("La fecha de ingreso debe ubicarse en el presente o en el pasado")
     return _fecha
 
+def parse_fecha_consulta(fecha: str) -> date:
+    _fecha = parse_fecha(fecha)
+    if _fecha < date.today():
+        raise ValueError("La fecha de la consulta debe ubicarse en el presente o en el futuro")
+    return _fecha
+
 # 1 (true) = bonificado
 # 2 (false) = no bonificado
 def parse_tipo(tipo: str) -> bool:
@@ -107,6 +114,24 @@ def parse_precio(precio: str) -> int:
     if _precio < 0:
         raise ValueError("Precio no puede ser negativo")
     return _precio
+
+def parse_opcion(opcion: str, _max: int) -> str:
+    _opcion = int(opcion)
+    if _opcion <= 0 or _opcion > _max:
+        raise ValueError(f"Opcion no esta dentro del rango 1-{_max}")
+    return _opcion
+
+def parse_pacientes(precio: str) -> int:
+    _precio = int(precio)
+    if _precio <= 0:
+        raise ValueError("La cantidad de pacientes debe ser positiva")
+    return _precio
+
+def parse_numero_atencion(numero_input: str, numeros_disponibles: list) -> int:
+    numero = int(numero_input)
+    if not (numero in numeros_disponibles):
+        raise NumeroAtencionNoDisponible(numero)
+    return numero
 
 # --------------------- Input section --------------------- #
 
@@ -144,3 +169,40 @@ def input_tipo(msg: str) -> bool:
 
 def input_precio(msg: str) -> int:
     return __input_generico(msg, parse_precio)
+
+def input_fecha_consulta(msg: str) -> date:
+    return __input_generico(msg, parse_fecha_consulta)
+
+def input_opcion(_max: int) -> int:
+    while True:
+        try:
+            input_ = input()
+            return parse_opcion(input_, _max)
+        except Exception as e:
+            print(e)
+
+def input_pacientes(msg: str) -> int:
+    return __input_generico(msg, parse_pacientes)
+
+def input_numero_atencion(numeros: list) -> int:
+    print("Seleccione el número de atención")
+    for i in range(len(numeros)):
+        if  i % 5 == 4:
+            print(numeros[i])
+        else:
+            print(numeros[i], end=" \t")
+    print()
+    while True:
+        try:
+            input_ = input()
+            return parse_numero_atencion(input_, numeros)
+        except Exception as e:
+            print(e)
+
+def input_dos_fechas() -> tuple[date, date]:
+    while True:
+        inicio = input_fecha("Ingrese la fecha de inicio en formato aaaa-mm-dd: ")
+        fin = input_fecha("Ingrese la fecha final en formato aaaa-mm-dd: ")
+        if fin >= inicio:
+            return (inicio, fin)
+        print("La fecha final debe ser posterior a la inicial. Ingrese nuevamente las fechas.")

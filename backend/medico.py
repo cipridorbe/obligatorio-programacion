@@ -31,13 +31,13 @@ class Medico(Persona):
     def dar_de_alta_medico(lista_medicos, lista_especialidades):
         vacio = Medico(None, None, 0, None, None, None, None)
         cedula = util.input_cedula("Ingrese la cédula de identidad: ")
-        while lista_medicos.contains(cedula):
+        while lista_medicos.contains_cedula(cedula):
             print("Esta cédula ya está registrada.")
             if util.input_tipo("1 - Ingresar una nueva cédula.\n2 - Salir.\n"):
                 cedula = util.input_cedula("Ingrese la cédula de identidad: ")
             else:
                 return None
-        vacio.dar_de_alta_persona(cedula)
+        vacio.dar_de_alta_persona(cedula=cedula)
         especialidad_nombre = util.input_nombre("Ingrese la especialidad: ")
         especialidad = lista_especialidades.search(especialidad_nombre)
         while especialidad == None:
@@ -50,6 +50,48 @@ class Medico(Persona):
                 especialidad = Especialidad(especialidad_nombre, precio)
         vacio.especialidad = especialidad
         return vacio
+    
+    @staticmethod
+    def dar_alta_medico_sin_nombre(nombre: str, lista_medicos, lista_especialidades):
+        vacio = Medico(None, None, 0, None, None, None, None)
+        cedula = util.input_cedula("Ingrese la cédula de identidad: ")
+        while lista_medicos.contains(cedula):
+            print("Esta cédula ya está registrada.")
+            if util.input_tipo("1 - Ingresar una nueva cédula.\n2 - Salir.\n"):
+                cedula = util.input_cedula("Ingrese la cédula de identidad: ")
+            else:
+                return None
+        vacio.dar_de_alta_persona(nombre=nombre, cedula=cedula)
+        especialidad_nombre = util.input_nombre("Ingrese la especialidad: ")
+        especialidad = lista_especialidades.search(especialidad_nombre)
+        while especialidad == None:
+            print("Esta especialidad no está dada de alta, elija una opción:")
+            if util.input_tipo(f"1 - Volver a ingresar la especialidad\n2 - Dar de alta la especialidad {especialidad_nombre}\n"):
+                especialidad_nombre = util.input_nombre("Ingrese la especialidad: ")
+                especialidad = lista_especialidades.search(especialidad_nombre)
+            else:
+                precio = util.input_precio("Ingrese el precio asociado: ")
+                especialidad = Especialidad(especialidad_nombre, precio)
+                if especialidad == None:
+                    return None
+        vacio.especialidad = especialidad
+        return vacio
+    
+    @staticmethod
+    def dar_alta_medico_sin_nombre_especialidad(nombre: str, especialidad: Especialidad, lista_medicos):
+        vacio = Medico(None, None, 0, None, None, None, None)
+        cedula = util.input_cedula("Ingrese la cédula de identidad: ")
+        for med in lista_medicos.lista: print(med.cedula)
+        while lista_medicos.contains_cedula(cedula):
+            print("Esta cédula ya está registrada.")
+            if util.input_tipo("1 - Ingresar una nueva cédula.\n2 - Salir.\n"):
+                cedula = util.input_cedula("Ingrese la cédula de identidad: ")
+            else:
+                return None
+        vacio.dar_de_alta_persona(nombre=nombre, cedula=cedula)
+        vacio.especialidad = especialidad
+        return vacio
+
 
 class ListaMedico:
     def __init__(self, length: int = 0):
@@ -67,6 +109,41 @@ class ListaMedico:
                 return True
         return False
     
+    def search_cedula(self, cedula_medico: int) -> Medico:
+        for medico in self.lista:
+            if medico.cedula == cedula_medico:
+                return medico
+        return None
+
+    def search_especialidad(self, especialidad_nombre: str):
+        lista = ListaMedico()
+        for medico in self.lista:
+            if medico.especialidad.nombre == especialidad_nombre:
+                lista.append(medico)
+        return lista
+    
+    def search(self, nombre: str, apellido: str = None):
+        lista = ListaMedico()
+        for medico in self.lista:
+            if medico.nombre == nombre:
+                if apellido == None:
+                    lista.append(medico)
+                elif medico.apellido == apellido:
+                    lista.append(medico)
+        return lista
+    
+    def search_nombre_apellido(self, nombre_apellido: str):
+        lista = ListaMedico()
+        for medico in self.lista:
+            if medico.nombre == nombre_apellido:
+                lista.append(medico)
+            elif medico.nombre + " " + medico.apellido == nombre_apellido:
+                lista.append(medico)
+        return lista
+
+    def length(self) -> int:
+        return len(self.lista)
+
     def append(self, medico: Medico):
         self.lista.append(medico)
     

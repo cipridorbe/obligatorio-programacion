@@ -29,7 +29,7 @@ class Especialidad:
     @staticmethod
     def dar_de_alta_especialidad(lista):
         nombre = util.input_nombre("Ingrese el nombre de la especialidad: ")
-        while lista.contains(nombre):
+        while lista.contains_str(nombre):
             print("Esta especialidad ya existe.")
             if util.input_tipo("1 - Ingresar devuelta el nombre.\n2 - Salir.\n"):
                 nombre = util.input_nombre("Ingrese el nombre de la especialidad: ")
