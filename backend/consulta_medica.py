@@ -33,7 +33,7 @@ Fecha: {self.fecha}. Cupos totales: {self.cantidad_pacientes}, cupos ocupados: {
         especialidad_nombre = util.input_nombre("Ingrese la especialidad: ")
         especialidad = lista_especialidades.search(especialidad_nombre)
         while especialidad == None:
-            print("Esta especialidad no está dada de alta, elija una opción:")
+            print(util.amarillo("Esta especialidad no está dada de alta, elija una opción:"))
             if util.input_tipo(f"1 - Volver a ingresar la especialidad\n2 - Dar de alta la especialidad {especialidad_nombre}\n"):
                 especialidad_nombre = util.input_nombre("Ingrese la especialidad: ")
                 especialidad = lista_especialidades.search(especialidad_nombre)
@@ -43,16 +43,20 @@ Fecha: {self.fecha}. Cupos totales: {self.cantidad_pacientes}, cupos ocupados: {
         
         # medico
         nombre_medico = util.input_nombre("Ingrese el nombre del médico: ")
-        medicos = lista_medicos.search_nombre_apellido(nombre_medico).search_especialidad(especialidad_nombre)
+        apellido_medico = util.input_apellido("Ingrese el apellido del médico: ")
+        nombre_completo_medico = nombre_medico + " " + apellido_medico
+        medicos = lista_medicos.search_nombre_apellido(nombre_completo_medico).search_especialidad(especialidad_nombre)
         while medicos.length() != 1:
             # Caso 1: no se encontro un medico
             if medicos.length() == 0:
-                print(f"El médico {nombre_medico} con especialidad {especialidad_nombre} no se pudo encontrar, elija una opción")
+                print(util.amarillo(f"El médico {nombre_completo_medico} con especialidad {especialidad_nombre} no se pudo encontrar, elija una opción:"))
                 if util.input_tipo("1 - Volver a ingresar el médico\n2 - Dar de alta el médico\n"):
                     nombre_medico = util.input_nombre("Ingrese el nombre del médico: ")
+                    apellido_medico = util.input_apellido("Ingrese el apellido del médico: ")
+                    nombre_completo_medico = nombre_medico + " " + apellido_medico
                     medicos = lista_medicos.search_nombre_apellido(nombre_medico).search_especialidad(especialidad_nombre)
                 else:
-                    medico = Medico.dar_alta_medico_sin_nombre_especialidad(nombre_medico, especialidad, lista_medicos)
+                    medico = Medico.dar_alta_medico_sin_nombre_apellido_especialidad(nombre_medico, apellido_medico, especialidad, lista_medicos)
                     if medico == None:
                         return None
                     medicos.append(medico)

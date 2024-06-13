@@ -32,7 +32,7 @@ class Medico(Persona):
         vacio = Medico(None, None, 0, None, None, None, None)
         cedula = util.input_cedula("Ingrese la cédula de identidad: ")
         while lista_medicos.contains_cedula(cedula):
-            print("Esta cédula ya está registrada.")
+            print(util.amarillo("Esta cédula ya está registrada."))
             if util.input_tipo("1 - Ingresar una nueva cédula.\n2 - Salir.\n"):
                 cedula = util.input_cedula("Ingrese la cédula de identidad: ")
             else:
@@ -41,7 +41,7 @@ class Medico(Persona):
         especialidad_nombre = util.input_nombre("Ingrese la especialidad: ")
         especialidad = lista_especialidades.search(especialidad_nombre)
         while especialidad == None:
-            print("Esta especialidad no está dada de alta, elija una opción:")
+            print(util.amarillo("Esta especialidad no está dada de alta, elija una opción:"))
             if util.input_tipo(f"1 - Volver a ingresar la especialidad\n2 - Dar de alta la especialidad {especialidad_nombre}\n"):
                 especialidad_nombre = util.input_nombre("Ingrese la especialidad: ")
                 especialidad = lista_especialidades.search(especialidad_nombre)
@@ -56,7 +56,7 @@ class Medico(Persona):
         vacio = Medico(None, None, 0, None, None, None, None)
         cedula = util.input_cedula("Ingrese la cédula de identidad: ")
         while lista_medicos.contains(cedula):
-            print("Esta cédula ya está registrada.")
+            print(util.amarillo("Esta cédula ya está registrada."))
             if util.input_tipo("1 - Ingresar una nueva cédula.\n2 - Salir.\n"):
                 cedula = util.input_cedula("Ingrese la cédula de identidad: ")
             else:
@@ -65,7 +65,7 @@ class Medico(Persona):
         especialidad_nombre = util.input_nombre("Ingrese la especialidad: ")
         especialidad = lista_especialidades.search(especialidad_nombre)
         while especialidad == None:
-            print("Esta especialidad no está dada de alta, elija una opción:")
+            print(util.amarillo("Esta especialidad no está dada de alta, elija una opción:"))
             if util.input_tipo(f"1 - Volver a ingresar la especialidad\n2 - Dar de alta la especialidad {especialidad_nombre}\n"):
                 especialidad_nombre = util.input_nombre("Ingrese la especialidad: ")
                 especialidad = lista_especialidades.search(especialidad_nombre)
@@ -78,17 +78,16 @@ class Medico(Persona):
         return vacio
     
     @staticmethod
-    def dar_alta_medico_sin_nombre_especialidad(nombre: str, especialidad: Especialidad, lista_medicos):
+    def dar_alta_medico_sin_nombre_apellido_especialidad(nombre: str, apellido: str, especialidad: Especialidad, lista_medicos):
         vacio = Medico(None, None, 0, None, None, None, None)
         cedula = util.input_cedula("Ingrese la cédula de identidad: ")
-        for med in lista_medicos.lista: print(med.cedula)
         while lista_medicos.contains_cedula(cedula):
-            print("Esta cédula ya está registrada.")
+            print(util.amarillo("Esta cédula ya está registrada."))
             if util.input_tipo("1 - Ingresar una nueva cédula.\n2 - Salir.\n"):
                 cedula = util.input_cedula("Ingrese la cédula de identidad: ")
             else:
                 return None
-        vacio.dar_de_alta_persona(nombre=nombre, cedula=cedula)
+        vacio.dar_de_alta_persona(nombre=nombre, apellido=apellido, cedula=cedula)
         vacio.especialidad = especialidad
         return vacio
 

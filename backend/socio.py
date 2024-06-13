@@ -35,7 +35,7 @@ class Socio(Persona):
         vacio = Socio(None, None, 0, None, None, None, False, 0.0)
         cedula = util.input_cedula("Ingrese la cédula de identidad: ")
         while lista.contains_cedula(cedula):
-            print("Esta cédula ya está registrada.")
+            print(util.amarillo("Esta cédula ya está registrada."))
             if util.input_tipo("1 - Ingresar una nueva cédula.\n2 - Salir.\n"):
                 cedula = util.input_cedula("Ingrese la cédula de identidad: ")
             else:

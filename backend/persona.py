@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from datetime import date
 from backend import util
 
@@ -52,8 +52,12 @@ class Persona(ABC):
             fecha_nacimiento = util.input_fecha_nacimiento("Ingrese la fecha de nacimiento en formato aaaa-mm-dd: ")
         if fecha_ingreso == None:
             fecha_ingreso = util.input_fecha_ingreso("Ingrese la fecha de ingreso a la institución en formato aaaa-mm-dd: ")
+        while fecha_ingreso < fecha_nacimiento:
+            print("La fecha de ingreso no puede ser anterior a la fecha de nacimiento. Vuelva a ingresarlas.")
+            fecha_nacimiento = util.input_fecha_nacimiento("Ingrese la fecha de nacimiento en formato aaaa-mm-dd: ")
+            fecha_ingreso = util.input_fecha_ingreso("Ingrese la fecha de ingreso a la institución en formato aaaa-mm-dd: ")
         if celular == None:
-            celular = util.input_celular("Ingse el número de celular: ")
+            celular = util.input_celular("Ingrese el número de celular: ")
         
         self.nombre =           nombre
         self.apellido =         apellido
