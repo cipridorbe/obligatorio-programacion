@@ -22,14 +22,6 @@ class Socio(Persona):
         self.tipo = tipo
         self.deuda = deuda
 
-    # @staticmethod
-    # def dar_de_alta_socio():
-    #     vacio = Socio(None, None, 0, None, None, None, False, 0.0)
-    #     vacio.dar_de_alta_persona()
-    #     vacio.tipo = util.input_tipo("Ingrese el tipo de socio: 1- Bonificado 2- No bonificado: ")
-    #     vacio.deuda = 0.0
-    #     return vacio
-
     @staticmethod
     def dar_de_alta_socio(lista):
         vacio = Socio(None, None, 0, None, None, None, False, 0.0)

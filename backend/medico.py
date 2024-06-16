@@ -20,12 +20,6 @@ class Medico(Persona):
                  especialidad):
         super().__init__(nombre, apellido, cedula, fecha_nacimiento, fecha_ingreso, celular)
         self.especialidad = especialidad
-    
-    # @staticmethod
-    # def dar_de_alta_medico():
-    #     vacio = Medico(None, None, 0, None, None, None)
-    #     vacio.dar_de_alta_persona()
-    #     return vacio
 
     @staticmethod
     def dar_de_alta_medico(lista_medicos, lista_especialidades):

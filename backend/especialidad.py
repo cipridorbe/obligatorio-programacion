@@ -14,18 +14,6 @@ class Especialidad:
         self.nombre = nombre
         self.precio = precio
     
-    # @staticmethod
-    # def dar_de_alta_especialidad():
-    #     nombre = util.input_nombre("Ingrese el nombre de la especialidad: ")
-    #     while policlinica_main.especialidades.contains(nombre):
-    #         print("Esta especialidad ya existe.")
-    #         if util.input_tipo("1 - Ingresar devuelta el nombre.\n2 - Salir."):
-    #             nombre = util.input_nombre("Ingrese el nombre de la especialidad: ")
-    #         else:
-    #             return None
-    #     precio = util.input_precio("Ingrese el precio asociado: ")
-    #     return Especialidad(nombre, precio)
-    
     @staticmethod
     def dar_de_alta_especialidad(lista):
         nombre = util.input_nombre("Ingrese el nombre de la especialidad: ")

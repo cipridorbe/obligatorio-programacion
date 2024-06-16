@@ -160,7 +160,7 @@ class Policlinica:
         ordenados = sorted(socios, key=lambda socio: socio.deuda)
         ordenados = reversed(ordenados)
         for socio in ordenados:
-            print(f"{socio.nombre} {socio.apellido}, {socio.deuda}")
+            print(f"{socio.nombre} {socio.apellido}: {socio.deuda}")
 
     # opcion 6.4
     def consultas_entre_fechas(self):

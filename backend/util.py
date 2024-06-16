@@ -35,17 +35,12 @@ def parse_nombre(nombre: str) -> str:
     # Check for errors
     if nombre is None:
         raise NoneError("nombre")
-        # raise TypeError("nombre no puede ser None")
     nombre = nombre.strip()
     if nombre == "":
         raise EmptyError("nombre", True)
     if not all(c.isalpha() or c.isspace() for c in nombre):
         raise ValueError("nombre debe contener solo letras y espacios")
-    # Convert to lowercase and remove multiple spaces
-    # nombre = nombre.lower()
-    # split = nombre.split()
-    # joined = " ".join(split)
-    # return joined
+    # Convert to lowercase and remove multiple spaces and accents
     return format_string(nombre)
 
 def parse_apellido(apellido: str) -> str:
@@ -58,11 +53,7 @@ def parse_apellido(apellido: str) -> str:
         raise EmptyError("apellido", True)
     if not all(c.isalpha() or c.isspace() for c in apellido):
         raise ValueError("apellido debe contener solo letras y espacios")
-    # Convert to lowercase and remove multiple spaces
-    # apellido = apellido.lower()
-    # split = apellido.split()
-    # joined = " ".join(split)
-    # return joined
+    # Convert to lowercase and remove multiple spaces and accents
     return format_string(apellido)
 
 def parse_cedula(cedula: str) -> int:
@@ -161,12 +152,14 @@ def parse_opcion(opcion: str, _max: int) -> str:
         raise ValueError(f"Opcion no esta dentro del rango 1-{_max}")
     return _opcion
 
-def parse_pacientes(precio: str) -> int:
-    is_EXIT(precio)
-    _precio = parse_int(precio)
-    if _precio <= 0:
+def parse_pacientes(pacientes: str) -> int:
+    is_EXIT(pacientes)
+    _pacientes = parse_int(pacientes)
+    if _pacientes <= 0:
         raise ValueError("La cantidad de pacientes debe ser positiva")
-    return _precio
+    if _pacientes > 100:
+        raise ValueError("La cantidad de pacientes no puede exceder a 100 pacientes")
+    return _pacientes
 
 def parse_numero_atencion(numero_input: str, numeros_disponibles: list) -> int:
     is_EXIT(numero_input)
