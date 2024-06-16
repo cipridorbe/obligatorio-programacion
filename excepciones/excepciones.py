@@ -8,7 +8,8 @@ class NoneError(Exception):
 
 class EmptyError(Exception):
     def __init__(self, var: str, masculino: bool):
-        super().__init__(f"{var} no puede ser vací{"o" if masculino else "a"}")
+        vacio="o" if masculino else "a"
+        super().__init__(f"{var} no puede ser vací{vacio}")
 
 class FechaInvalida(Exception):
     def __init__(self, fecha: str):

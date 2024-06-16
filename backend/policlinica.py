@@ -70,6 +70,7 @@ class Policlinica:
         if consultas.length() == 0:
             print(util.rojo(f"No se encontraron consultas con la especialidad {especialidad_nombre}. Volviendo al menu principal."))
             return
+        print("Seleccione la consulta:")
         for i in range(consultas.length()):
             consulta = consultas.lista[i]
             print(f"{i+1} - Doctor: {consulta.medico.nombre} {consulta.medico.apellido}. Día de la consulta {consulta.fecha}")
