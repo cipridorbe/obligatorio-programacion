@@ -161,7 +161,7 @@ class Policlinica:
             return
         ordenados = sorted(socios, key=lambda socio: socio.deuda)
         ordenados = reversed(ordenados)
-        print("Estos son los socios y sus deudas en orde ascendente")
+        print("Estos son los socios y sus deudas en orden ascendente:")
         for socio in ordenados:
             print(f"{socio.nombre} {socio.apellido}: {socio.deuda}")
 
@@ -176,7 +176,7 @@ class Policlinica:
         print(f"Se encontraron {len(consultas_ordenadas)} consultas entre {inicio} y {fin}.")
         print("Desea ver las consultas")
         if util.input_tipo("1- Sí   2- No:  "):
-            print(f"Estas son las consultas entre {inicio} y {fin}.")
+            print(f"Estas son las consultas entre {inicio} y {fin}:")
             for consulta in consultas_ordenadas:
                 print(consulta)
 
